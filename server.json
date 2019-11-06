@@ -1,0 +1,67 @@
+{
+  "stock": [
+    {
+      "id": 1,
+      "amount": 3
+    },
+    {
+      "id": 2,
+      "amount": 5
+    },
+    {
+     "id": 3,
+      "amount": 2
+    },
+    {
+      "id": 4,
+      "amount": 1
+    },
+    {
+      "id": 5,
+      "amount": 5
+    },
+    {
+      "id": 6,
+      "amount": 10
+    }
+],
+
+  "products": [
+    {
+      "id": 1,
+      "title": "Monitor Gamer HQ Curvo 27 Pol, 165Hz, 1ms, Freesync, HDMI, Display Port",
+      "price": 1729.00,
+      "image": "https://img.terabyteshop.com.br/produto/g/monitor-gamer-hq-curvo-27-pol-165hz-1ms-freesync-hdmi-display-port_82529.jpg"
+    },
+    {
+      "id": 2,
+      "title": "Placa Mãe Biostar Racing X370GT5, Chipset X370, AMD AM4, ATX, DDR4",
+      "price": 738.92,
+      "image": "https://img.terabyteshop.com.br/produto/g/placa-mae-biostar-racing-x370gt5-ddr4-amd-am4_45957.jpg"
+    },
+    {
+      "id": 3,
+      "title": "Pc Gamer Super Soldier Lvl-2 Intel Core I5 8400 / Geforce GTX 1060 6GB / DDR4 8GB / HD 1TB / 500W",
+      "price": 3734.48,
+      "image": "https://img.terabyteshop.com.br/produto/g/PC-Gamer-Super-Soldier-LVL-2-Intel-Core-I5-Placa-de-Video-Nvidia-GeForce_84099.jpg"
+    },
+    {
+      "id": 5,
+      "title": "Water Cooler PCyes Nix, RGB 120mm, Intel-AMD, PWC120H40PTRGB",
+      "price": 242.00,
+      "image": "https://img.terabyteshop.com.br/produto/g/water-cooler-pcyes-nix-120mm-mangueiras-de-nylon-led-rgb-pwc120h40ptrgb_83575.jpg"
+    },
+      {
+      "id": 6,
+      "title": "Placa de Vídeo PNY GeForce RTX 2060 XLR8, 6GB GDDR6, 192Bit, VCG20606SFPPB-O",
+      "price": 1837.93,
+      "image": "https://img.terabyteshop.com.br/produto/g/placa-de-video-pny-geforce-rtx-2060-xlr8-6gb-gddr6-192bit-vcg20606sfppb-o_84349.jpg"
+    },
+    {
+      "id": 4,
+      "title": "Memória DDR4 Kingston HyperX Predator HX430C15PB3/8 8GB 3000MHZ Preta",
+      "price": 389.00,
+      "image": "https://img.terabyteshop.com.br/produto/g/memoria-ddr4-kingston-hyperx-predator-hx430c15pb38-8gb-3000mhz-preta_61990.jpg"
+    }
+  ]
+}
