@@ -1,101 +1,79 @@
-import React from 'react';
+/* eslint-disable react/state-in-constructor */
+/* eslint-disable react/prefer-stateless-function */
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { MdAddShoppingCart } from 'react-icons/md';
+import { formatPrice } from '../../util/format';
+import api from '../../services/api';
+
+import * as CartActions from '../../store/modules/cart/actions';
 
 import { ProductList } from './styles';
 
-export default function Home() {
-  return (
-    <ProductList>
-      <li>
-        <img
-          src="https://img.terabyteshop.com.br/produto/g/monitor-gamer-hq-curvo-27-pol-165hz-1ms-freesync-hdmi-display-port_82529.jpg"
-          alt="Monitor gamer"
-        />
-        <strong>Monitor gamer</strong>
-        <span>R$1.729,00</span>
-        <button type="button">
-          <div>
-            <MdAddShoppingCart size={16} color="#FFF" /> 3
-          </div>
+class Home extends Component {
+  state = {
+    products: [],
+  };
 
-          <span>ADICIONAR AO CARRINHO</span>
-        </button>
-      </li>
-      <li>
-        <img
-          src="https://img.terabyteshop.com.br/produto/g/monitor-gamer-hq-curvo-27-pol-165hz-1ms-freesync-hdmi-display-port_82529.jpg"
-          alt="Monitor gamer"
-        />
-        <strong>Monitor gamer</strong>
-        <span>R$1.729,00</span>
-        <button type="button">
-          <div>
-            <MdAddShoppingCart size={16} color="#FFF" /> 3
-          </div>
+  async componentDidMount() {
+    const response = await api.get('products');
 
-          <span>ADICIONAR AO CARRINHO</span>
-        </button>
-      </li>
-      <li>
-        <img
-          src="https://img.terabyteshop.com.br/produto/g/monitor-gamer-hq-curvo-27-pol-165hz-1ms-freesync-hdmi-display-port_82529.jpg"
-          alt="Monitor gamer"
-        />
-        <strong>Monitor gamer</strong>
-        <span>R$1.729,00</span>
-        <button type="button">
-          <div>
-            <MdAddShoppingCart size={16} color="#FFF" /> 3
-          </div>
+    const data = response.data.map(product => ({
+      ...product,
+      priceFormated: formatPrice(product.price),
+    }));
 
-          <span>ADICIONAR AO CARRINHO</span>
-        </button>
-      </li>
-      <li>
-        <img
-          src="https://img.terabyteshop.com.br/produto/g/monitor-gamer-hq-curvo-27-pol-165hz-1ms-freesync-hdmi-display-port_82529.jpg"
-          alt="Monitor gamer"
-        />
-        <strong>Monitor gamer</strong>
-        <span>R$1.729,00</span>
-        <button type="button">
-          <div>
-            <MdAddShoppingCart size={16} color="#FFF" /> 3
-          </div>
+    this.setState({ products: data });
+  }
 
-          <span>ADICIONAR AO CARRINHO</span>
-        </button>
-      </li>
-      <li>
-        <img
-          src="https://img.terabyteshop.com.br/produto/g/monitor-gamer-hq-curvo-27-pol-165hz-1ms-freesync-hdmi-display-port_82529.jpg"
-          alt="Monitor gamer"
-        />
-        <strong>Monitor gamer</strong>
-        <span>R$1.729,00</span>
-        <button type="button">
-          <div>
-            <MdAddShoppingCart size={16} color="#FFF" /> 3
-          </div>
+  handleAddProduct = id => {
+    const { addToCartRequest } = this.props;
 
-          <span>ADICIONAR AO CARRINHO</span>
-        </button>
-      </li>
-      <li>
-        <img
-          src="https://img.terabyteshop.com.br/produto/g/monitor-gamer-hq-curvo-27-pol-165hz-1ms-freesync-hdmi-display-port_82529.jpg"
-          alt="Monitor gamer"
-        />
-        <strong>Monitor gamer</strong>
-        <span>R$1.729,00</span>
-        <button type="button">
-          <div>
-            <MdAddShoppingCart size={16} color="#FFF" /> 3
-          </div>
+    addToCartRequest(id);
+  };
 
-          <span>ADICIONAR AO CARRINHO</span>
-        </button>
-      </li>
-    </ProductList>
-  );
+  render() {
+    const { products } = this.state;
+    const { amount } = this.props;
+
+    return (
+      <ProductList>
+        {products.map(product => (
+          <li key={product.id}>
+            <img src={product.image} alt={product.title} />
+            <strong>{product.title}</strong>
+            <span>{product.priceFormated}</span>
+
+            <button
+              type="button"
+              onClick={() => this.handleAddProduct(product.id)}
+            >
+              <div>
+                <MdAddShoppingCart size={16} color="#FFF" />{' '}
+                {amount[product.id] || 0}
+              </div>
+              <span>ADICIONAR AO CARRINHO</span>
+            </button>
+          </li>
+        ))}
+      </ProductList>
+    );
+  }
 }
+
+const mapStateToProps = state => ({
+  amount: state.cart.reduce((amount, product) => {
+    amount[product.id] = product.amount;
+
+    return amount;
+  }, {}),
+});
+
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(CartActions, dispatch);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Home);
